@@ -26,10 +26,7 @@ do
 		[[ $total == "5000" ]] && { request=20; }
 		[[ $total == "10000" ]] && { request=20; }
 		[[ $total == "30000" ]] && { request=30; }
-
-		echo $limit and $total and $request
 		connect_time=$(ab -n $total -c $request $URL?$limit   | tee -a benchark-log | grep "Connect:" | awk '{print $NF}')
-		echo $connect_time
 		if [ $connect_time -lt 30000 ]; then
 			echo "Api Connection time within limit"
 		else
